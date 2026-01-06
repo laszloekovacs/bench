@@ -21,16 +21,35 @@ GLWindow *x11_gl_window_create(const char *title, int width, int height)
     }
 
     int screen = DefaultScreen(win->display);
-    int attribs[] = {GLX_RGBA, GLX_DEPTH_SIZE, 24, None};
-    XVisualInfo *vi = glXChooseVisual(win->display, screen, attribs);
+    // int attribs[] = {GLX_RGBA, GLX_DEPTH_SIZE, 24, None};
+    /*
+        XVisualInfo *vi = glXChooseVisual(win->display, screen, attribs);
 
-    if (!vi)
-    {
-        fprintf(stderr, "Failed to choose visual\n");
-        XCloseDisplay(win->display);
-        free(win);
-        return NULL;
-    }
+        if (!vi)
+        {
+            fprintf(stderr, "Failed to choose visual\n");
+            XCloseDisplay(win->display);
+            free(win);
+            return NULL;
+        }
+    */
+
+    int fb_attribs[] = {
+        GLX_X_RENDERABLE, True,
+        GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+        GLX_RENDER_TYPE, GLX_RGBA_BIT,
+        GLX_DOUBLEBUFFER, True,
+        GLX_RED_SIZE, 8,
+        GLX_GREEN_SIZE, 8,
+        GLX_BLUE_SIZE, 8,
+        GLX_DEPTH_SIZE, 24,
+        None};
+
+    int fbcount;
+    GLXFBConfig *fbc = glXChooseFBConfig(win->display, screen, fb_attribs, &fbcount);
+    GLXFBConfig fbconfig = fbc[0];
+
+    XVisualInfo *vi = glXGetVisualFromFBConfig(win->display, fbconfig);
 
     XSetWindowAttributes swa;
     swa.colormap = XCreateColormap(win->display, RootWindow(win->display, screen), vi->visual, AllocNone);
@@ -42,7 +61,23 @@ GLWindow *x11_gl_window_create(const char *title, int width, int height)
 
     XSetStandardProperties(win->display, win->window, title, title, None, NULL, 0, NULL);
 
+    /*
     win->context = glXCreateContext(win->display, vi, NULL, GL_TRUE);
+   */
+    // Load the extension function
+    PFNGLXCREATECONTEXTATTRIBSARBPROC glXCreateContextAttribsARB =
+        (void *)glXGetProcAddressARB((const GLubyte *)"glXCreateContextAttribsARB");
+
+    // Attributes for a legacy 2.1 compatibility context
+    int ctx_attribs[] = {
+        GLX_CONTEXT_MAJOR_VERSION_ARB, 2,
+        GLX_CONTEXT_MINOR_VERSION_ARB, 1,
+        GLX_CONTEXT_PROFILE_MASK_ARB, GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
+        None};
+
+    win->context = glXCreateContextAttribsARB(win->display, fbconfig, 0, True, ctx_attribs);
+    // glXMakeCurrent(r_display, r_window, r_context);
+
     glXMakeCurrent(win->display, win->window, win->context);
 
     XMapWindow(win->display, win->window);
@@ -91,6 +126,7 @@ void run_event_loop(Display *dpy, Window win)
 
         // Optional: render OpenGL here
         R_BeginFrame();
+        Test_Polygon();
         R_EndFrame();
 
         glXSwapBuffers(dpy, win);

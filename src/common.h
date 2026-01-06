@@ -1,12 +1,17 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
+#define CL_TARGET_OPENCL_VERSION 300
+
+#include <stdio.h>
 #include <GL/gl.h>
 #include <X11/Xlib.h>
 #include <CL/cl.h>
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+
+#include "render.h"
 
 typedef struct
 {

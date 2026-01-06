@@ -1,10 +1,13 @@
 #include "common.h"
 #include "render.h"
+#include "stdio.h"
 
 void R_Init()
 {
+    printf("GL VERSION: %s\n", glGetString(GL_VERSION));
+
     // Basic GL state
-    glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+    glClearColor(0.9f, 0.1f, 0.15f, 1.0f);
     glDisable(GL_DEPTH_TEST);
 }
 
