@@ -6,6 +6,8 @@
 #include "common.h"
 #include "stdbool.h"
 
+#include "render.h"
+
 GLWindow *x11_gl_window_create(const char *title, int width, int height)
 {
     GLWindow *win = malloc(sizeof(GLWindow));
@@ -88,7 +90,9 @@ void run_event_loop(Display *dpy, Window win)
         }
 
         // Optional: render OpenGL here
-        // glClear(GL_COLOR_BUFFER_BIT);
-        // glXSwapBuffers(dpy, win);
+        R_BeginFrame();
+        R_EndFrame();
+
+        glXSwapBuffers(dpy, win);
     }
 }
