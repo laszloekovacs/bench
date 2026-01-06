@@ -14,3 +14,5 @@
 - diagnostics, metrics, benchmarking
 - streaming assets models / textures / texture atlasses
 - openAL dynamic sound
+- web based editor in react / threejs?
+- long distance rendering / multi layer
