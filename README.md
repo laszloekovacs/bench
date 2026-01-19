@@ -23,3 +23,4 @@ system headers should all go into one and modules should include only one, eg co
 
 common should include the type definitions from defs.h and also define all low level, os dependent engine type function declarations.
 
+use getopt to indicate what world file to load, or what server to connect to.
