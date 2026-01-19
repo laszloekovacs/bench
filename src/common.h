@@ -1,8 +1,6 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
-#define CL_TARGET_OPENCL_VERSION 300
-
 #include <stdio.h>
 #include <GL/gl.h>
 #include <X11/Xlib.h>
@@ -24,9 +22,14 @@ GLWindow *x11_gl_window_create(const char *title, int width, int height);
 void x11_gl_window_destroy(GLWindow *win);
 void run_event_loop(Display *dpy, Window win);
 
-/* console */
-
+/* console printing */
 void Con_Init(void);
-void Con_Print(void);
+void Con_Print(char *str);
+void Con_Printf(char *str);
+
+/* nix argument parsing */
+void Arg_Init(void);
+void Arg_Parse(void);
+char *Arg_Get(char *arg);
 
 #endif

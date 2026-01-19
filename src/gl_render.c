@@ -2,6 +2,9 @@
 #include "render.h"
 #include "stdio.h"
 
+/* should be in its own opencl source */
+#define CL_TARGET_OPENCL_VERSION 300
+
 void R_Init()
 {
     printf("GL VERSION: %s\n", glGetString(GL_VERSION));
