@@ -24,4 +24,9 @@ GLWindow *x11_gl_window_create(const char *title, int width, int height);
 void x11_gl_window_destroy(GLWindow *win);
 void run_event_loop(Display *dpy, Window win);
 
+/* console */
+
+void Con_Init(void);
+void Con_Print(void);
+
 #endif
