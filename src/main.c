@@ -4,14 +4,38 @@ int running = 1;
 
 int main(int argc, char **argv)
 {
-    Arg_Init(argc, argv);
+    /* init console so the subsystems can write to it */
     Con_Init();
+
+    /* console variables */
+
+    /* console commands */
+
+    /* parse lauch arguments */
+    Arg_Init(argc, argv);
+
+    /* timer and performance timers */
     Timer_Init();
+
+    /* asset streaming system */
+
+    /* x windowing system */
+
+    /* graphics */
+
+    /* input handling */
+
+    /* sound */
 
     while (running)
     {
+        /* server side */
+
+        /* client side */
         Client_Frame();
     }
+
+    /* resource cleanup */
 
     return 0;
 }
