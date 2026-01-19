@@ -17,3 +17,9 @@
 - web based editor in react / threejs?
 - long distance rendering / multi layer
 - matcap shading
+
+
+system headers should all go into one and modules should include only one, eg common.h where most definitions should reside.
+
+common should include the type definitions from defs.h and also define all low level, os dependent engine type function declarations.
+
