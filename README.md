@@ -31,3 +31,5 @@ base system should be:
 - console printing
 - console commands
 - launch args parsing
+
+Host-frame should call client-frame and server-frame

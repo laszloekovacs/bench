@@ -28,8 +28,7 @@ void Con_Print(char *str);
 void Con_Printf(char *str);
 
 /* nix argument parsing */
-void Arg_Init(void);
-void Arg_Parse(void);
+void Arg_Init(int argc, char **argv);
 char *Arg_Get(char *arg);
 
 #endif
