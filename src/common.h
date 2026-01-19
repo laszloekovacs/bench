@@ -22,13 +22,18 @@ GLWindow *x11_gl_window_create(const char *title, int width, int height);
 void x11_gl_window_destroy(GLWindow *win);
 void run_event_loop(Display *dpy, Window win);
 
+/* nix argument parsing */
+void Arg_Init(int argc, char **argv);
+char *Arg_Get(char *arg);
+
 /* console printing */
 void Con_Init(void);
 void Con_Print(char *str);
 void Con_Printf(char *str);
 
-/* nix argument parsing */
-void Arg_Init(int argc, char **argv);
-char *Arg_Get(char *arg);
+/* high res timer */
+void Timer_Init(void);
+double Timer_GetSeconds(void);
+uint64_t Timer_GetNanos(void);
 
 #endif

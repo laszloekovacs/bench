@@ -4,23 +4,14 @@
 #include <time.h>
 #include <stdint.h>
 
-/* performance counting, forward declarations */
-void timer_init(void);
-
-// useful for delta calculations
-double timer_get_seconds(void);
-
-// performance counter
-uint64_t timer_get_nanos(void);
-
 static struct timespec startup_time;
 
-void timer_init(void)
+void Timer_Init(void)
 {
     clock_gettime(CLOCK_MONOTONIC, &startup_time);
 }
 
-double timer_get_seconds(void)
+double Timer_GetSeconds(void)
 {
     struct timespec now;
     clock_gettime(CLOCK_MONOTONIC, &now)
@@ -33,11 +24,12 @@ double timer_get_seconds(void)
     return sec + (nsec * 1e-9);
 }
 
-uint64_t timer_get_nanos(void)
+uint64_t Timer_GetNanos(void)
 {
     struct timespec now;
     clock_gettime(CLOCK_MONOTONIC, &now);
     return (uint64_t)now.tv_sec * 1000000000ULL + (uint64_t)now.tv_nsec;
 }
 
+/* todo milliseconds? */
 #endif

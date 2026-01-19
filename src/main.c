@@ -1,6 +1,23 @@
 #include "common.h"
 
-int main()
+int running = 1;
+
+int main(int argc, char **argv)
+{
+    Arg_Init(argc, argv);
+    Con_Init();
+    Timer_Init();
+
+    while (running)
+    {
+        Client_Frame();
+    }
+
+    return 0;
+}
+
+/*
+int main(int argc, char **argv)
 {
 
     GLWindow *gv = x11_gl_window_create("bench", 600, 400);
@@ -10,3 +27,6 @@ int main()
 
     return 0;
 }
+
+
+*/
