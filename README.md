@@ -34,3 +34,4 @@ base system should be:
 
 Host-frame should call client-frame and server-frame
 
+- develop exporter for blender or use webgl file format
