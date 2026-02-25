@@ -18,7 +18,7 @@
 - long distance rendering / multi layer
 - matcap shading
 - pre calculated radiosity, similar to q1, q2
-
+- texture generator functionality (opencl?)
 
 system headers should all go into one and modules should include only one, eg common.h where most definitions should reside.
 
