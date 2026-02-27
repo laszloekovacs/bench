@@ -36,3 +36,4 @@ base system should be:
 Host-frame should call client-frame and server-frame
 
 - develop exporter for blender or use webgl file format
+- file loading should stream assets into memory -> parse -> free up raw data
